@@ -458,7 +458,7 @@ do
       name = 'rose-pine',
     },
   }
-  require('rose-pine').setup()
+  require('rose-pine').setup({})
   vim.cmd.colorscheme 'rose-pine-moon'
 
   -- Highlight todo, notes, etc in comments
