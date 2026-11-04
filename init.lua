@@ -122,6 +122,20 @@ do
   --  Schedule the setting after `UiEnter` because it can increase startup-time.
   --  Remove this option if you want your OS clipboard to remain independent.
   --  See `:help 'clipboard'`
+  --
+  -- 1. Tell Neovim to use its built-in OSC 52 provider
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+      ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste '+',
+      ['*'] = require('vim.ui.clipboard.osc52').paste '*',
+    },
+  }
+
   vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
   -- Enable break indent
@@ -438,13 +452,13 @@ do
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
   -- vim.cmd.colorscheme 'tokyonight-night'
 
-  vim.pack.add({
-	  {
-		  src = "https://github.com/rose-pine/neovim",
-		  name = "rose-pine",
-	  },
-  })
-  require("rose-pine").setup()
+  vim.pack.add {
+    {
+      src = 'https://github.com/rose-pine/neovim',
+      name = 'rose-pine',
+    },
+  }
+  require('rose-pine').setup()
   vim.cmd.colorscheme 'rose-pine-moon'
 
   -- Highlight todo, notes, etc in comments
